@@ -34,25 +34,32 @@ $spacing-unit: 30px !default;
     width: 75%;
 }
 
-.home-column {
-    flex: 50%;
+@media only screen and (max-width: 900px) {
+    .home-wrapper {
+        flex-direction: column;
+    }
 }
 
+.home-column {
+    flex-shrink: 0;
+    flex-basis: 50%;
+}
+ 
 .home-column-text > * {
     color: white;
 }
 
 .home-column-text h1 {
-    font-size: 250%;
+    font-size: 3vw;
 }
 
 .home-column-text p {
-    font-size: 125%;
+    font-size: 2vw;
 }
 
 .home-column-image img {
-    width: 40vh;
-    height: 40vh;
+    width: 30vw;
+    height: 30vw;
 }
 
 // Footer styles.

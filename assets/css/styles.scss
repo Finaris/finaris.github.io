@@ -1,0 +1,88 @@
+--- 
+--- 
+@import "main";
+
+// Define defaults for each variable.
+$spacing-unit: 30px !default;
+
+// Home page styles.
+.home-bg {
+    position: relative; 
+    height: 65vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-bg::before {
+    content: "";
+    background-image: url('/assets/images/home_bg.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.30;
+}
+
+.home-wrapper {
+    display: flex;
+    position: relative;
+    text-align: center;
+    width: 75%;
+}
+
+.home-column {
+    flex: 50%;
+}
+
+.home-column-text > * {
+    color: white;
+}
+
+.home-column-text h1 {
+    font-size: 250%;
+}
+
+.home-column-text p {
+    font-size: 125%;
+}
+
+.home-column-image img {
+    width: 40vh;
+    height: 40vh;
+}
+
+// Footer styles.
+.social-media-list {
+    list-style: none;
+    margin-left: 0;
+    display: table;
+    margin: 0 auto;
+    li {
+        float: left;
+        margin: 5px 10px 5px 0;
+        &:last-of-type { margin-right: 0 }
+        a {
+          display: block;
+          padding: $spacing-unit / 4;
+        }
+    }
+}
+
+.svg-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    fill: currentColor;
+    padding: 5px 5px 5px 5px;
+    vertical-align: text-bottom;
+    transform: scale(1.5);
+    &:hover { color: #FFFFFF }
+}
+
+.light-grey {
+    color: #DDDDDD;
+}

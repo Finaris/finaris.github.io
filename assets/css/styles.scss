@@ -34,12 +34,6 @@ $spacing-unit: 30px !default;
     width: 75%;
 }
 
-@media only screen and (max-width: 900px) {
-    .home-wrapper {
-        flex-direction: column;
-    }
-}
-
 .home-column {
     flex-shrink: 0;
     flex-basis: 50%;
@@ -60,6 +54,25 @@ $spacing-unit: 30px !default;
 .home-column-image img {
     width: 30vw;
     height: 30vw;
+}
+
+@media only screen and (max-width: 500px) {
+    .home-wrapper {
+        flex-direction: column;
+    }
+    
+    .home-column-text h1 {
+        font-size: 4vw;
+    }
+    
+    .home-column-text p {
+        font-size: 3vw;
+    }
+    
+    .home-column-image img {
+        width: 35vw;
+        height: 35vw;
+    }
 }
 
 // Footer styles.

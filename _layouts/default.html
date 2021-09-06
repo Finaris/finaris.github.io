@@ -15,18 +15,17 @@
   <body>
 
     <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <h1 id="project_title"><a href="{{ site.url }}" class="logo-href">{{ site.title | default: site.github.repository_name }}</a></h1>
-        </header>
+    <div class="header">
+      <a href="{{ site.url }}" class="logo">{{ site.title | default: site.github.repository_name }}</a>
+
+      <!-- NAVBAR -->
+      <div class="header-right">
+        <a href="{{ site.url }}">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <a href="/resume.pdf">Resume</a>
+      </div>
     </div>
-      
-    <!-- NAVBAR -->
-    <ul class="navbar">
-        <li>About</li>
-        <li>Blog</li>
-        <li>Home</li>
-    </ul>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">

@@ -2,13 +2,24 @@
 layout: default
 title: Blog
 ---
-<h1>Latest Posts</h1>
 
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
+<div class="constrain">
+   <h1>Latest Posts</h1> 
+   <h3><a href="/categories">Categories</a></h3>
+    
+    <hr/>
+    
+   <section class="card-list">
+        {% for post in site.posts %}
+        <div class="card">
+            <img src="{{ post.thumbnail_image }}" class="blog-preview-image"/>
+            <div class="card-details">
+                <h3>{{ post.date | date:"%d %b" }} - {{ post.title }}</h3>
+                {{ post.excerpt }}
+                <a href="{{ post.url }}" class="btn">Read More</a>
+            </div>
+        </div>
+        <hr/>
+        {% endfor %}
+   </section>
+</div>

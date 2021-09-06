@@ -156,3 +156,9 @@ $spacing-unit: 30px !default;
 .light-grey {
     color: #DDDDDD;
 }
+
+// Blog styles.
+.blog-preview-image {
+    max-width: 25vw;
+    max-height: 25vw;
+}

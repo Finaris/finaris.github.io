@@ -14,7 +14,7 @@ title: Blog
         <div class="card">
             <img src="{{ post.thumbnail_image }}" class="blog-preview-image"/>
             <div class="card-details">
-                <h3>{{ post.date | date:"%d %b" }} - {{ post.title }}</h3>
+                <h3>{{ post.date | date:"%d %b %Y" }} - {{ post.title }}</h3>
                 {{ post.excerpt }}
                 <a href="{{ post.url }}" class="btn">Read More</a>
             </div>

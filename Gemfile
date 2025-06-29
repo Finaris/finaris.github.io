@@ -31,3 +31,6 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 # Ruby 3.0.0 does not include webrick
 gem "webrick"
 
+# Ruby 3.4.0 does not include csv
+gem "csv"
+

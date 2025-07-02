@@ -1,0 +1,30 @@
+// Main SCSS file - imported by assets/css/styles.scss
+// This file can contain global variables, mixins, and base styles
+
+// Global variables
+$primary-color: #CAA0CA;
+$secondary-color: #E8C8E8;
+$dark-bg: #212121;
+$darker-bg: #2d2d2d;
+$text-color: #333;
+$white: #fff;
+
+// Global mixins
+@mixin gradient-bg($start-color, $end-color) {
+  background: linear-gradient(135deg, $start-color 0%, $end-color 100%);
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+// Base styles
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

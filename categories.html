@@ -4,21 +4,39 @@ permalink: /categories/
 title: Categories
 ---
 
+<div class="constrain">
+  <h1>Categories</h1>
+  
+  
+  <div id="archives">
+  {% assign sorted_categories = site.categories | sort %}
+  {% for category in sorted_categories %}
+    <div class="archive-group">
+      {% capture category_name %}{{ category | first }}{% endcapture %}
+      <div id="{{ category_name | slugize }}"></div>
 
-<div id="archives">
-{% for category in site.categories %}
-  <div class="archive-group">
-    {% capture category_name %}{{ category | first }}{% endcapture %}
-    <div id="#{{ category_name | slugize }}"></div>
-    <p></p>
-
-    <h3 class="category-head">{{ category_name }}</h3>
-    <a name="{{ category_name | slugize }}"></a>
-    {% for post in site.categories[category_name] %}
-    <article class="archive-item">
-      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
-    </article>
-    {% endfor %}
+      <h2 class="category-head">
+        <span class="category-tag">{{ category_name }}</span>
+        {% assign post_count = site.categories[category_name] | size %}
+        <span class="category-count">({{ post_count }} {% if post_count == 1 %}post{% else %}posts{% endif %})</span>
+      </h2>
+      
+      <div class="archive-posts">
+        {% for post in site.categories[category_name] %}
+        <a href="{{ site.baseurl }}{{ post.url }}" class="archive-item-link">
+          <article class="archive-item">
+            <div class="archive-date">{{ post.date | date: "%b %d, %Y" }}</div>
+            <h3>{{post.title}}</h3>
+            {% if post.description %}
+            <p class="archive-excerpt">{{ post.description }}</p>
+            {% else %}
+            <p class="archive-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+            {% endif %}
+          </article>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
   </div>
-{% endfor %}
 </div>

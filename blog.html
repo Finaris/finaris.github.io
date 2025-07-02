@@ -3,23 +3,76 @@ layout: default
 title: Blog
 ---
 
-<div class="constrain">
-   <h1>Latest Posts</h1> 
-   <h3><a href="/categories">Categories</a></h3>
+<div class="blog-featured-container">
+   <header class="blog-header">
+     <h1>Latest Thoughts</h1> 
+   </header>
 
-    <hr/>
+   {% assign latest_post = site.posts.first %}
+   {% assign remaining_posts = site.posts | slice: 1, 8 %}
+   
+   <!-- Featured Latest Post -->
+   <article class="featured-post">
+     <h1 class="featured-title">{{ latest_post.title }}</h1>
+     {% if latest_post.thumbnail_image %}
+     <div class="featured-image">
+       <img src="{{ latest_post.thumbnail_image }}" alt="{{ latest_post.title }}" loading="lazy"/>
+     </div>
+     {% endif %}
+     
+     <div class="featured-content">
+       <div class="featured-meta">
+         <span class="featured-date">{{ latest_post.date | date: "%B %d, %Y" }}</span>
+         <span class="featured-badge">Latest</span>
+       </div>
+       <div class="featured-categories">
+         {% for category in latest_post.categories %}
+         <a href="/categories/#{{category|slugize}}" class="category-tag featured-tag">{{category}}</a>
+         {% endfor %}
+       </div>
+       {% if latest_post.description %}
+       <p class="featured-description">{{ latest_post.description }}</p>
+       {% else %}
+       <p class="featured-description">{{ latest_post.excerpt | strip_html }}</p>
+       {% endif %}
+       <a href="{{ latest_post.url }}" class="featured-read-btn">Continue Reading</a>
+     </div>
+   </article>
 
-   <section class="card-list">
-        {% for post in site.posts %}
-        <div class="card">
-            <img src="{{ post.thumbnail_image }}" class="blog-preview-image"/>
-            <div class="card-details">
-                <h3>{{ post.date | date:"%d %b %Y" }} - {{ post.title }}</h3>
-                {{ post.excerpt }}
-                <a href="{{ post.url }}" class="btn">Read More</a>
-            </div>
-        </div>
-        <hr/>
-        {% endfor %}
+   {% if remaining_posts.size > 0 %}
+   <!-- Previous Posts Grid -->
+   <section class="previous-posts">
+     <div class="more-posts-header">
+       <h2>More Posts</h2>
+       <a href="/categories" class="categories-browse-btn">Browse by Category</a>
+     </div>
+     <div class="posts-grid">
+       {% for post in remaining_posts %}
+       <a href="{{ post.url }}" class="grid-card-link">
+         <article class="grid-card">
+           {% if post.thumbnail_image %}
+           <div class="grid-image">
+             <img src="{{ post.thumbnail_image }}" alt="{{ post.title }}" loading="lazy"/>
+           </div>
+           {% endif %}
+           <div class="grid-content">
+             <div class="grid-meta">
+               <span class="grid-date">{{ post.date | date: "%b %d, %Y" }}</span>
+               {% for category in post.categories %}
+               <span class="category-tag small">{{category}}</span>
+               {% endfor %}
+             </div>
+             <h3>{{ post.title }}</h3>
+             {% if post.description %}
+             <p class="grid-excerpt">{{ post.description | truncatewords: 15 }}</p>
+             {% else %}
+             <p class="grid-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+             {% endif %}
+           </div>
+         </article>
+       </a>
+       {% endfor %}
+     </div>
    </section>
+   {% endif %}
 </div>

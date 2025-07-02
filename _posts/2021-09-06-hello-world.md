@@ -2,6 +2,7 @@
 layout: post
 thumbnail_image: /assets/posts/hello-world/hello-world.jpeg
 title: Hello World!
+description: An introductory post to my blog.
 categories: Personal
 ---
 

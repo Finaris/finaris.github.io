@@ -2,21 +2,32 @@
 layout: default
 ---
 
-<div class="post-categories">
-  {% if post %}
-    {% assign categories = post.categories %}
-  {% else %}
-    {% assign categories = page.categories %}
-  {% endif %}
-  {% for category in categories %}
-  <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
-  {% unless forloop.last %}&nbsp;{% endunless %}
-  {% endfor %}
-</div>
+<article class="post">
+  <header class="post-header">
+    <div class="post-categories">
+      {% if post %}
+        {% assign categories = post.categories %}
+      {% else %}
+        {% assign categories = page.categories %}
+      {% endif %}
+      {% for category in categories %}
+      <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+      {% unless forloop.last %}&nbsp;{% endunless %}
+      {% endfor %}
+    </div>
 
-<h1>{{ page.title }}</h1>
-<p>{{ page.date | date_to_string }}</p>
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      • {% include reading-time.html %}
+    </p>
 
-<img src="{{ page.thumbnail_image }}" class="blog-preview-image"/>
+    {% if page.thumbnail_image %}
+    <img src="{{ page.thumbnail_image }}" class="blog-preview-image" alt="{{ page.title }}" loading="lazy"/>
+    {% endif %}
+  </header>
 
-{{ content }}
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

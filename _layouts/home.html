@@ -15,29 +15,57 @@
   <body>
 
     <!-- HEADER -->
-    <div class="header">
-      <a href="{{ site.url }}" class="logo">{{ site.title | default: site.github.repository_name }}</a>
-      <!-- Hamburger Icon (mobile only) -->
-      <button class="hamburger" aria-label="Open navigation" onclick="document.querySelector('.header-right').classList.toggle('open')">
-        <span></span><span></span><span></span>
-      </button>
-      <!-- NAVBAR -->
-      <div class="header-right">
+    <header class="header">
+      <div class="header-container">
+        <a href="{{ site.url }}" class="logo">{{ site.title | default: site.github.repository_name }}</a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+          <a href="{{ site.url }}">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </nav>
+        
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+      
+      <!-- Mobile Navigation Menu -->
+      <nav class="mobile-nav">
         <a href="{{ site.url }}">Home</a>
         <a href="/blog">Blog</a>
         <a href="/about">About</a>
-      </div>
-    </div>
+      </nav>
+    </header>
+
     <script>
-      // Close drawer when clicking outside (mobile UX)
-      document.addEventListener('click', function(e) {
-        const nav = document.querySelector('.header-right');
-        const burger = document.querySelector('.hamburger');
-        if(nav && burger && nav.classList.contains('open')) {
-          if(!nav.contains(e.target) && !burger.contains(e.target)) {
-            nav.classList.remove('open');
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const header = document.querySelector('.header');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+          header.classList.toggle('mobile-menu-open');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!header.contains(e.target)) {
+            header.classList.remove('mobile-menu-open');
           }
-        }
+        });
+        
+        // Close mobile menu when clicking on nav links
+        const mobileNavLinks = mobileNav.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            header.classList.remove('mobile-menu-open');
+          });
+        });
       });
     </script>
     <!-- MAIN CONTENT -->

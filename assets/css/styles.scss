@@ -8,76 +8,171 @@ $spacing-unit: 30px !default;
 
 // Header + Navbar styles.
 .header {
-    overflow: hidden;
     background: linear-gradient(135deg, #212121 0%, #2d2d2d 100%);
-    padding: 1vw;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.header a {
-    float: left;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 2vw;
-    padding: 1vw;
-    line-height: 3vw;
-    transition: all 0.3s ease;
-    border-radius: 4px;
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.header a.logo {
-    font-size: 4vw;
+.logo {
+    font-size: 2rem;
     font-family: 'Optima', 'Segoe UI', sans-serif;
-    padding: 1vw;
     font-weight: 600;
+    color: white;
+    text-decoration: none;
     background: linear-gradient(45deg, #CAA0CA, #E8C8E8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.header a:hover:not(a.logo) {
+.logo:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Desktop Navigation
+.desktop-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.desktop-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.desktop-nav a:hover {
     color: #CAA0CA;
     background-color: rgba(202, 160, 202, 0.1);
     transform: translateY(-1px);
 }
 
-.header-right {
-    float: right;
+// Mobile Menu Button
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 4px;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+// Mobile Navigation
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #2d2d2d;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.mobile-nav a:hover {
+    background-color: rgba(202, 160, 202, 0.1);
+}
+
+.mobile-nav a:last-child {
+    border-bottom: none;
+}
+
+// Mobile styles
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .header-container {
+    padding: 1rem;
+  }
+  
+  // Show mobile menu when open
+  .header.mobile-menu-open .mobile-nav {
+    display: flex;
+  }
+  
+  // Animate hamburger lines when menu is open
+  .header.mobile-menu-open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .header.mobile-menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .header.mobile-menu-open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
 }
 
 @media screen and (max-width: 500px) {
-  .header a {
-      float: none;
-      display: block;
-      text-align: center;
-      font-size: 5vw;
-      padding: 3vw;
-      margin: 0.5vw 0;
-  }
-    
-  .header a.logo {
-      font-size: 10vw;
-      padding: 5vw;
-  }
-  
-  .header-right {
-      float: none;
+  .logo {
+    font-size: 1.2rem;
   }
   
   .post-title {
-      font-size: 1.8em;
+    font-size: 1.8em;
+  }
+  
+  // Fix home page mobile layout
+  .home-bg {
+    height: auto;
+    min-height: 80vh;
+    padding: 2rem 1rem;
+  }
+  
+  .home-wrapper {
+    width: 95%;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .home-column {
+    flex-basis: auto;
   }
 }
 
 // Home page styles.
 .home-bg {
     position: relative; 
-    height: 70vh;
+    height: calc(100vh - 80px); // Full viewport minus header height
     width: 100%;
     display: flex;
     align-items: center;
@@ -185,7 +280,7 @@ body {
 // Ensure proper page structure
 #main_content_wrap {
     flex: 1;
-    padding-bottom: 1em;
+    padding: 1rem 0;
 }
 
 // Footer styles.
@@ -1370,71 +1465,66 @@ button:focus {
     color: #CAA0CA;
 }
 
-// Hamburger menu styles
+// Mobile navigation
 .hamburger {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1100;
-  margin-left: 1vw;
+  padding: 10px;
+  z-index: 1000;
 }
+
 .hamburger span {
   display: block;
-  width: 28px;
-  height: 4px;
-  margin: 4px 0;
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
   background: #CAA0CA;
-  border-radius: 2px;
   transition: 0.3s;
 }
 
+/* Mobile styles */
 @media (max-width: 700px) {
-  .header-right {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 70vw;
-    max-width: 320px;
-    background: linear-gradient(135deg, #212121 0%, #2d2d2d 100%);
-    box-shadow: -2px 0 12px rgba(0,0,0,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 80px;
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-    z-index: 1050;
-  }
-  .header-right.open {
-    transform: translateX(0);
-  }
-  .header-right a {
-    float: none;
-    display: block;
-    text-align: center;
-    font-size: 2em;
-    padding: 1em 0;
-    margin: 0.5em 0;
-    color: #fff;
-    background: none;
-    border-radius: 0;
-  }
   .hamburger {
-    display: flex;
+    display: block;
     position: absolute;
-    right: 1vw;
-    top: 1vw;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
   }
-  .header .logo {
+  
+  .header-right {
+    float: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #2d2d2d;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1001;
+  }
+  
+  .header-right.open {
+    display: flex;
+  }
+  
+  .header-right a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+  }
+  
+  .header-right a:hover {
+    background: #444;
+  }
+  
+  .header {
     position: relative;
-    z-index: 1101;
   }
 }

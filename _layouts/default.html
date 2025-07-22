@@ -78,5 +78,44 @@
 
     <!-- FOOTER  -->
     {% include footer.html %}
+    
+    <!-- Scroll to top button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+      </svg>
+    </button>
+    
+    <script>
+      // Scroll to top button functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        if (scrollToTopBtn) {
+          // Show/hide scroll to top button based on scroll position
+          function toggleScrollToTopBtn() {
+            if (window.pageYOffset > 300) {
+              scrollToTopBtn.classList.add('visible');
+            } else {
+              scrollToTopBtn.classList.remove('visible');
+            }
+          }
+          
+          // Scroll to top when button is clicked
+          scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+          
+          // Listen for scroll events
+          window.addEventListener('scroll', toggleScrollToTopBtn, { passive: true });
+          
+          // Initial check
+          toggleScrollToTopBtn();
+        }
+      });
+    </script>
   </body>
 </html>

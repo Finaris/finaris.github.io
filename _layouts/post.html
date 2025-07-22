@@ -27,14 +27,194 @@ layout: default
     {% endif %}
   </header>
 
-  <div class="post-content">
-    {{ content }}
+  <div class="post-layout">
+    <!-- Table of Contents Sidebar -->
+    <aside id="table-of-contents" class="toc-sidebar">
+      <div class="toc-sticky">
+        <h3 class="toc-title">Contents</h3>
+        <ul id="toc-list" class="toc-list"></ul>
+      </div>
+    </aside>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
   </div>
   
   <nav class="post-navigation">
-    <a href="/blog" class="back-to-blog">
-      <span class="nav-arrow">←</span>
-      <span class="nav-text">Back to Blog</span>
-    </a>
+    <div class="nav-links">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url }}" class="nav-link nav-prev">
+        <span class="nav-arrow">←</span>
+        <div class="nav-content">
+          <span class="nav-label">Previous</span>
+          <span class="nav-title">{{ page.previous.title | truncate: 40 }}</span>
+        </div>
+      </a>
+      {% else %}
+      <div class="nav-link nav-disabled"></div>
+      {% endif %}
+      
+      <a href="/blog" class="nav-link nav-all">
+        <div class="nav-content">
+          <span class="nav-label">Back to Blog</span>
+          <span class="nav-icon">⋮⋮⋮</span>
+        </div>
+      </a>
+      
+      {% if page.next.url %}
+      <a href="{{ page.next.url }}" class="nav-link nav-next">
+        <div class="nav-content">
+          <span class="nav-label">Next</span>
+          <span class="nav-title">{{ page.next.title | truncate: 40 }}</span>
+        </div>
+        <span class="nav-arrow">→</span>
+      </a>
+      {% else %}
+      <div class="nav-link nav-disabled"></div>
+      {% endif %}
+    </div>
   </nav>
 </article>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('table-of-contents');
+  const tocList = document.getElementById('toc-list');
+  const postContent = document.querySelector('.post-content');
+  
+  // Find all headings in the post content
+  const headings = postContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  
+  if (headings.length === 0) {
+    // Hide TOC if no headings found
+    tocContainer.style.display = 'none';
+    return;
+  }
+  
+  const tocLinks = [];
+  
+  // Generate unique IDs for headings and build TOC
+  headings.forEach(function(heading, index) {
+    // Create a unique ID based on the heading text
+    const headingText = heading.textContent.trim();
+    const sanitizedText = headingText.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+    
+    // Ensure the ID is unique and doesn't conflict with DOM properties
+    let headingId;
+    
+    // Only set ID if heading doesn't already have one
+    if (!heading.id) {
+      headingId = 'toc-heading-' + index + '-' + (sanitizedText || 'section');
+      heading.id = headingId;
+    } else {
+      // Use existing ID for the TOC link
+      headingId = heading.id;
+    }
+    
+    // Create TOC entry
+    const tocItem = document.createElement('li');
+    tocItem.className = 'toc-item toc-' + heading.tagName.toLowerCase();
+    
+    const tocLink = document.createElement('a');
+    tocLink.href = '#' + headingId;
+    tocLink.textContent = headingText;
+    tocLink.className = 'toc-link';
+    tocLink.dataset.target = headingId;
+    
+    // Smooth scroll on click
+    tocLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      heading.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+    
+    tocItem.appendChild(tocLink);
+    tocList.appendChild(tocItem);
+    tocLinks.push(tocLink);
+    
+    // Add anchor link to heading
+    const anchor = document.createElement('a');
+    anchor.className = 'heading-anchor';
+    anchor.href = '#' + headingId;
+    anchor.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>';
+    anchor.setAttribute('aria-label', 'Link to this heading');
+    heading.appendChild(anchor);
+  });
+  
+  // Track active sections while scrolling
+  function updateActiveSection() {
+    const scrollTop = window.pageYOffset;
+    const offset = 100; // Offset for better UX
+    
+    let activeHeading = null;
+    
+    // Find the current section
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const heading = headings[i];
+      const rect = heading.getBoundingClientRect();
+      const top = rect.top + scrollTop;
+      
+      if (scrollTop + offset >= top) {
+        activeHeading = heading;
+        break;
+      }
+    }
+    
+    // Update TOC links
+    tocLinks.forEach(function(link) {
+      link.classList.remove('active', 'reading');
+      
+      if (activeHeading && link.dataset.target === activeHeading.id) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  // Initial call and scroll listener
+  updateActiveSection();
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  
+  // Make checkboxes interactive
+  const checkboxes = postContent.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(function(checkbox) {
+    // Remove disabled attribute
+    checkbox.removeAttribute('disabled');
+    
+    // Get the parent li element
+    const listItem = checkbox.closest('li');
+    if (listItem) {
+      // Add appropriate class based on checked state
+      if (checkbox.checked) {
+        listItem.classList.add('task-list-item-checked');
+      }
+      
+      // Handle checkbox changes
+      checkbox.addEventListener('change', function() {
+        if (this.checked) {
+          listItem.classList.add('task-list-item-checked');
+        } else {
+          listItem.classList.remove('task-list-item-checked');
+        }
+      });
+      
+      // Make the custom checkbox clickable
+      listItem.addEventListener('click', function(e) {
+        // Only trigger if clicking on the checkbox area (first 2em)
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        if (x <= 32 && e.target !== checkbox) { // 2em = ~32px
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+  });
+});
+</script>

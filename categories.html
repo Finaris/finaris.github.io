@@ -5,8 +5,14 @@ title: Categories
 ---
 
 <div class="constrain">
-  <h1>Categories</h1>
-  
+  <div class="page-header">
+    <h1>Categories</h1>
+    <a href="/blog" class="back-nav inline">
+      <span class="nav-arrow">←</span>
+      <span class="nav-text">Back to Blog</span>
+    </a>
+  </div>
+  <p class="archive-intro">Browse posts organized by topic. For chronological order, see <a href="/archive">All Posts</a>.</p>
   
   <div id="archives">
   {% assign sorted_categories = site.categories | sort %}

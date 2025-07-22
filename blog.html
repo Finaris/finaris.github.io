@@ -2,6 +2,7 @@
 layout: default
 title: Blog
 ---
+<!-- TODO: Need to consider case if I eventually get too many posts for all of them to fit on the page -->
 
 <div class="blog-featured-container">
    <header class="blog-header">
@@ -10,6 +11,7 @@ title: Blog
 
    {% assign latest_post = site.posts.first %}
    {% assign remaining_posts = site.posts | slice: 1, 8 %}
+   {% assign total_posts = site.posts.size %}
    
    <!-- Featured Latest Post -->
    <article class="featured-post">
@@ -44,7 +46,10 @@ title: Blog
    <section class="previous-posts">
      <div class="more-posts-header">
        <h2>More Posts</h2>
-       <a href="/categories" class="categories-browse-btn">Browse by Category</a>
+       <div class="browse-options">
+         <a href="/archive" class="browse-btn primary">View All Posts</a>
+         <a href="/categories" class="browse-btn secondary">Browse by Category</a>
+       </div>
      </div>
      <div class="posts-grid">
        {% for post in remaining_posts %}
@@ -72,6 +77,19 @@ title: Blog
          </article>
        </a>
        {% endfor %}
+     </div>
+   </section>
+   {% endif %}
+
+   <!-- Pagination hint when there are more posts -->
+   {% if total_posts > 9 %}
+   <section class="pagination-hint">
+     <div class="pagination-content">
+       <p>Showing latest 9 of {{ total_posts }} posts</p>
+       <div class="pagination-options">
+         <a href="/archive" class="view-all-btn primary">View All Posts</a>
+         <a href="/categories" class="view-all-btn secondary">Browse by Category</a>
+       </div>
      </div>
    </section>
    {% endif %}

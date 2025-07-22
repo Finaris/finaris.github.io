@@ -1,0 +1,37 @@
+---
+layout: default
+permalink: /archive/
+title: All Posts
+---
+
+<div class="constrain">
+  <div class="page-header">
+    <h1>All Posts</h1>
+    <a href="/blog" class="back-nav inline">
+      <span class="nav-arrow">←</span>
+      <span class="nav-text">Back to Blog</span>
+    </a>
+  </div>
+  <p class="archive-intro">A chronological archive of all {{ site.posts.size }} posts.</p>
+  
+  <div class="archive-list">
+    {% for post in site.posts %}
+    <a href="{{ site.baseurl }}{{ post.url }}" class="archive-item-link">
+      <article class="archive-item">
+        <div class="archive-date">{{ post.date | date: "%b %d, %Y" }}</div>
+        <h3>{{ post.title }}</h3>
+        <div class="archive-meta">
+          {% for category in post.categories %}
+          <span class="category-tag small">{{ category }}</span>
+          {% endfor %}
+        </div>
+        {% if post.description %}
+        <p class="archive-excerpt">{{ post.description }}</p>
+        {% else %}
+        <p class="archive-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+        {% endif %}
+      </article>
+    </a>
+    {% endfor %}
+  </div>
+</div>

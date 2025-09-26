@@ -4,11 +4,17 @@ layout: default
 
 # About Me
 
-I'm a security engineer at Duolingo. My current role has a broad set of responsbilities that all sum to making sure Duolingo's infrastructure is secure. Prior to my time at Duolingo, I worked as a security engineer on Two Sigma's security team.
+I'm currently in between roles, excited by a new opportunity I'll be starting
+at the end of October 2025. I was previously a security engineer at Duolingo
+and a software engineer on Two Sigma's secure development team.
 
-I studied Computer Science and Engineering (Course 6-3) at the Massachusetts Institute of Technology and graduated in 2020. I interned twice at Google as a software engineer (2018, 2017). I was also involved in two brief research externships: one at Microsoft (2019) and another at IBM Research (2018).
+I earned my S.B. in Computer Science and Engineering (Course 6-3) from MIT in 2020. 
+During my undergrad, I completed two software engineering internships at Google 
+and research externships at IBM Research and Microsoft.
 
-Some of my personal interests include rock climbing, playing the electric bass, running, messing around with computers, cooking, and baking. That said, I'm always keeping an eye out for trying new things!
+Outside of work, I enjoy rock climbing, playing (electric) bass, running, 
+messing around with computers, and baking. That said, I’m always trying 
+something new!
 
 ## Contact
 If you'd like to chat, feel free to reach out to me at [{{ site.email }}](mailto:{{ site.email }}).

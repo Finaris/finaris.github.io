@@ -4,7 +4,7 @@ layout: default
 
 # About Me
 
-I'm currently an information security engineer at D.E. Shaw Research. 
+I'm currently an information security engineer. 
 Previously, I was a security engineer at Duolingo and a software engineer on 
 Two Sigma's secure development team.
 

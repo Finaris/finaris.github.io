@@ -875,21 +875,100 @@ body {
         font-style: italic;
     }
     
+    // Inline code
     code {
-        background-color: #f4f4f4;
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
-        font-family: 'Monaco', 'Consolas', monospace;
-        font-size: 0.9em;
+        background-color: rgba(202, 160, 202, 0.15) !important;
+        padding: 0.2em 0.5em;
+        border-radius: 4px !important;
+        font-family: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+        font-size: 0.85em;
+        color: #9a5c9a !important;
+        border: 1px solid rgba(202, 160, 202, 0.25) !important;
+        word-break: break-word;
     }
-    
+
+    // Code blocks
     pre {
-        background-color: #f8f8f8;
-        border: 1px solid #e1e1e8;
-        border-radius: 6px;
-        padding: 1em;
+        background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%) !important;
+        border: 1px solid #3d3d4d !important;
+        border-radius: 10px !important;
+        padding: 1.25em 1.5em !important;
         overflow-x: auto;
         margin: 1.5em 0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+
+        // Reset inline code styles when inside pre
+        code {
+            background: transparent !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            font-size: 0.9em;
+            color: #e4e4ef !important;
+            border: none !important;
+            display: block;
+            line-height: 1.6;
+            word-break: normal;
+            white-space: pre;
+        }
+
+        // Custom scrollbar for code blocks
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(202, 160, 202, 0.4);
+            border-radius: 4px;
+
+            &:hover {
+                background: rgba(202, 160, 202, 0.6);
+            }
+        }
+    }
+
+    // Syntax highlighting colors (Rouge/Pygments compatible)
+    .highlight {
+        background: transparent !important;
+        margin: 1.5em 0;
+        border-radius: 10px;
+        overflow: hidden;
+
+        pre {
+            margin: 0;
+            border-radius: 10px !important;
+        }
+
+        // Comments
+        .c, .c1, .cm, .cs, .cp { color: #6a6a8a !important; font-style: italic; }
+        // Strings
+        .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr { color: #a9dc76 !important; }
+        // Keywords
+        .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv { color: #ff6188 !important; }
+        // Numbers
+        .m, .mf, .mh, .mi, .mo, .il { color: #ab9df2 !important; }
+        // Names/variables
+        .n, .nb, .nc, .nd, .ne, .nf, .ni, .nl, .nn, .no, .nt, .nv { color: #78dce8 !important; }
+        // Function names
+        .nf, .fm { color: #a9dc76 !important; }
+        // Class names
+        .nc { color: #ffd866 !important; }
+        // Operators
+        .o, .ow { color: #ff6188 !important; }
+        // Punctuation
+        .p { color: #e4e4ef !important; }
+        // Generic
+        .gd { color: #ff6188 !important; background: rgba(255, 97, 136, 0.1) !important; }
+        .gi { color: #a9dc76 !important; background: rgba(169, 220, 118, 0.1) !important; }
+        .ge { font-style: italic; }
+        .gs { font-weight: bold; }
+        // Line numbers
+        .lineno { color: #5a5a7a !important; padding-right: 1em; user-select: none; }
     }
 }
 
@@ -1369,6 +1448,26 @@ button:focus {
     
     .btn {
         padding: 0.8em 1.5em; // Larger touch targets on mobile
+    }
+
+    // Mobile code block adjustments
+    .post-content {
+        pre {
+            padding: 1em;
+            border-radius: 8px;
+            font-size: 0.85em;
+            margin: 1em -0.5em; // Extend slightly for full-width feel
+            border-radius: 0;
+
+            code {
+                font-size: 0.85em;
+            }
+        }
+
+        code {
+            font-size: 0.8em;
+            padding: 0.15em 0.4em;
+        }
     }
 }
 
@@ -2258,4 +2357,68 @@ ul li:has(input[type="checkbox"]) {
   .header {
     position: relative;
   }
+}
+
+// Global code block overrides (loaded last to override theme defaults)
+// Target Jekyll/kramdown's highlighter-rouge wrapper specifically
+.highlighter-rouge,
+div.highlighter-rouge,
+.post-content .highlighter-rouge,
+.post .highlighter-rouge {
+    background: transparent !important;
+    border: none !important;
+    margin: 1.5em 0 !important;
+
+    .highlight {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    pre,
+    pre.highlight {
+        background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%) !important;
+        border: 1px solid #3d3d4d !important;
+        border-radius: 10px !important;
+        padding: 1.25em 1.5em !important;
+        overflow-x: auto !important;
+        margin: 0 !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+
+        code {
+            background: transparent !important;
+            background-color: transparent !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            font-size: 0.9em !important;
+            color: #e4e4ef !important;
+            border: none !important;
+            display: block !important;
+            line-height: 1.6 !important;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', monospace !important;
+        }
+    }
+}
+
+// Also target plain pre elements not in highlighter-rouge
+pre:not(.highlighter-rouge pre) {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%) !important;
+    border: 1px solid #3d3d4d !important;
+    border-radius: 10px !important;
+    padding: 1.25em 1.5em !important;
+    overflow-x: auto !important;
+    margin: 1.5em 0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+
+    code {
+        background: transparent !important;
+        background-color: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        font-size: 0.9em !important;
+        color: #e4e4ef !important;
+        border: none !important;
+        display: block !important;
+        line-height: 1.6 !important;
+        font-family: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', monospace !important;
+    }
 }

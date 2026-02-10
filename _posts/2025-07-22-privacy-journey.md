@@ -3,7 +3,7 @@ layout: post
 thumbnail_image: /assets/posts/privacy-journey/hacker-hoodie.webp
 title: "A Practical Guide to Overhauling Your Privacy"
 description: A high-level overview of how I updated my personal privacy posture.
-categories: Tech
+categories: Security
 ---
 
 After nearly a year of silence, I'm happy to make my return to writing! A

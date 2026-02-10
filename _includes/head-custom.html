@@ -2,4 +2,54 @@
 <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon/favicon.ico' | relative_url }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon/favicon-32x32.png' | relative_url }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon/favicon-16x16.png' | relative_url }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon/apple-touch-icon.png' | relative_url }}"> 
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon/apple-touch-icon.png' | relative_url }}">
+
+<!-- Code block styling overrides -->
+<style>
+  /* Dark code blocks */
+  .highlighter-rouge .highlight,
+  .highlight,
+  div.highlight {
+    background: transparent !important;
+  }
+
+  pre,
+  pre.highlight,
+  .highlighter-rouge pre,
+  .highlight pre {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%) !important;
+    border: 1px solid #3d3d4d !important;
+    border-radius: 10px !important;
+    padding: 1.25em 1.5em !important;
+    overflow-x: auto !important;
+    margin: 1.5em 0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  }
+
+  pre code,
+  pre.highlight code,
+  .highlighter-rouge pre code,
+  .highlight pre code {
+    background: transparent !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: 0.9em !important;
+    color: #e4e4ef !important;
+    border: none !important;
+    display: block !important;
+    line-height: 1.6 !important;
+    font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', monospace !important;
+  }
+
+  /* Syntax highlighting */
+  .highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .cp { color: #6a6a8a !important; font-style: italic; }
+  .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr { color: #a9dc76 !important; }
+  .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv { color: #ff6188 !important; }
+  .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #ab9df2 !important; }
+  .highlight .n, .highlight .nb, .highlight .ni, .highlight .nl, .highlight .nn, .highlight .no, .highlight .nt, .highlight .nv { color: #78dce8 !important; }
+  .highlight .nf, .highlight .fm { color: #a9dc76 !important; }
+  .highlight .nc, .highlight .nd, .highlight .ne { color: #ffd866 !important; }
+  .highlight .o, .highlight .ow { color: #ff6188 !important; }
+  .highlight .p { color: #e4e4ef !important; }
+</style> 

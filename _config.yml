@@ -1,7 +1,6 @@
 # Main site information
 title: Madelyn Potts
 description: The personal website and blog of Madelyn Potts! Exploring cybersecurity, technology, and just whatever else is on her mind.
-email: mademt@pm.me
 baseurl: ""
 url: "http://madelyn.dev"
 
@@ -12,9 +11,8 @@ social_media_links:
   bluesky: madelyn.dev
 
 # Build settings
-remote_theme: pages-themes/slate@v0.2.0
+theme: jekyll-theme-slate
 plugins:
-  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag

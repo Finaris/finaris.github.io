@@ -17,4 +17,4 @@ messing around with computers, and baking. That said, I’m always trying
 something new!
 
 ## Contact
-If you'd like to chat, feel free to reach out to me at [{{ site.email }}](mailto:{{ site.email }}).
+If you'd like to chat, feel free to reach out to me at `mademt` at `pm.me`.

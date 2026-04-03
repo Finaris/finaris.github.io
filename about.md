@@ -4,7 +4,7 @@ layout: default
 
 # About Me
 
-I'm currently an information security engineer. 
+I'm currently an information security engineer in the biotech space. 
 Previously, I was a security engineer at Duolingo and a software engineer on 
 Two Sigma's secure development team.
 
